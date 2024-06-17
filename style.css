@@ -6,9 +6,10 @@
     html {
         scroll-behavior: smooth;
     }        
-    #pirmais{
+    .pirmais{
         background-color: #3E5148;
         font-family: "Raleway", sans-serif;
+        transition: opacity 0.5s ease-out;
     }
     #otrais{
         background-color: #A2813A;
