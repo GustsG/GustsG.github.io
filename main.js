@@ -11,6 +11,11 @@ function switchSection() {
   }
 }
 
+document.getElementById("playButton").addEventListener("click", function() {
+  var video = document.getElementById("myVideo");
+  video.play();
+});
+
 const toTop = document.querySelector(".to-top");
 
 window.addEventListener("scroll", () => {
