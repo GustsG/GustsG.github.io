@@ -3,9 +3,30 @@
 <head>
     <title>Test</title>
     <style>
-        img {
+        * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box; /* Ensures padding does not affect the total width/height */
+        }        
+        #pirmais{
+            background-color: #3E5148;
+        }
+        #otrais{
+            background-color: #A2813A;
+        }
+        #tresais{
+            background-color: #8FBFCA;
+        }
+        .logo {
+            margin-top: 10px;
+            margin-left: 10px;
             width: 170px;
             border-radius: 10px;
+        }
+        .left{
+            text-align: left;
+            margin-right: auto;
+            width: 40%;
         }
         .center {
             display: block;
@@ -13,16 +34,62 @@
             margin-right: auto;
             width: 50%;
         }
+        .right {
+            text-align: right;
+            width: 40%;
+            margin-left: auto;
+        }
         h1 {
             text-align: center;
+            color: #F0EADB;
+            padding: 80px;
+        }
+        h2{
+            color: #F0EADB;
+
+            padding: 100px;
         }
     </style>
 </head>
 <body>
-    <img src="images/logo.png">
-    <h1>Kā mitrāji pasargā no plūdiem</h1>
-    <img class="center" src="images/testimage.png">
-    <p>I'm hosted with GitHub Pages.</p>
-    
+    <div id="pirmais">
+    <img class="logo" src="images/logo.png">
+    <h1> Kā mitrāji pasargā no plūdiem</h1>
+    <img class="center" src="images/testmain.png">
+    <h1>Īss apraksts</h1>
+    <img class="center" src="images/test1.png">
+    <h2 class="center">Lorem ipsum dolor sit amet, consectetuer adipiscing
+        elit, sed diam nonummy nibh euismod tincidunt ut
+        laoreet dolore magna aliquam erat volutpat. Ut wisi
+        enim ad minim veniam, quis nostrud exerci tation
+        ullamcorper suscipit lobortis nisl ut aliquip ex ea
+        commodo consequat. Duis autem vel eum iriure dolor</h2>
+    </div>
+
+    <div id="otrais">
+
+        <h1 class="left">Informācija par projektu</h1>
+        <h2 class="left">Lorem ipsum dolor sit
+            amet, consectetuer
+            adipiscing elit, sed
+            diam nonummy nibh
+            euismod tincidunt ut
+            laoreet dolore magna</h2>
+        <h1 class="right">Kā tu ar savu
+            iesaisti vari palīdzēt</h1>
+        <h2 class="right">Lorem ipsum dolor sit amet,
+            consectetuer adipiscing elit,
+            sed diam nonummy nibh
+            euismod tincidunt ut laoreet
+            dolore magna aliquam erat
+            volutpat. Ut wisi enim ad</h2>
+    </div>
+
+    <div id="tresais">
+        <h1>Vairāk par projektu lasi šeit</h1>
+        <h1>webadrese</h1>
+
+        <h2 class="center">atpakaļ uz sākumu</h2>
+    </div>
 </body>
 </html>
