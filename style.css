@@ -133,3 +133,37 @@
       .container:active .fas{
         color:#000000;
       }
+
+
+
+
+    .content-container {
+        display: flex; /* Use Flexbox for direct children alignment */
+        align-items: center; /* Vertically aligns the child elements */
+        justify-content: center; /* Horizontally centers the child elements in the container */
+        gap: 20px; /* Adjust the space between the image and the button */
+        cursor: pointer;
+        background: #3E5148; /* Example background, adjust as needed */
+        border-radius: 0%; /* Adjust as needed */
+        transition: all 0.3s ease-in; /* Smooth transition for any changes */
+    }
+    
+    .content-container .logo { 
+        width: 50% !important;/* Adjust based on your actual requirements */
+        height: auto; /* Maintain aspect ratio */
+    }
+    
+    .content-container .action-button {
+    display: grid;
+    place-items: center;
+    font-size: 4rem; /* Adjusted for visibility */
+    color: gray; /* Icon color */
+    background-color: transparent; /* Remove button background */
+    border: none; /* Remove button border */
+    padding: 0; /* Adjust or remove padding as needed */
+    cursor: pointer;
+    }
+
+    .action-button:active .fas {
+        color: black; /* Changes the FontAwesome icon color to black when the button is clicked */
+    }
