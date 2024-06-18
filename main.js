@@ -46,18 +46,28 @@ document.getElementById('presentbutton2').addEventListener('click', function() {
   }
 });
 
-
-function switchSection() {
-  var section1 = document.getElementById('pirmais');
-  var section2 = document.getElementById('pirmaisdivi');
-
-  if (section1.style.display === 'none') {
-    section1.style.display = 'block';
-    section2.style.display = 'none';
+document.getElementById('presentbutton3').addEventListener('click', function() {
+  if (window.presentationConnection && window.presentationConnection.state === 'connected') {
+      window.presentationConnection.send(JSON.stringify({action: 'play', url: 'videos/video3.mp4'}));
   } else {
-    section1.style.display = 'none';
-    section2.style.display = 'block';
+      console.log('Presentation connection is not established or no longer active.');
   }
+});
+
+
+function switchSection(currentSectionId) {
+  const sections = document.querySelectorAll('.section'); // Select all sections
+  let currentIndex = 0; // Default to show the first if nothing is found
+  // Find the index of the currently active section
+  sections.forEach((section, index) => {
+      if (section.id === currentSectionId) {
+          currentIndex = index;
+      }
+      section.style.display = 'none'; // Hide all sections
+  });
+  // Calculate the next section index
+  const nextIndex = (currentIndex + 1) % sections.length; // Loop back to the first after the last
+  sections[nextIndex].style.display = 'block'; // Show the next section
 }
 
 const toTop = document.querySelector(".to-top");

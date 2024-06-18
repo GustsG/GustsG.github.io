@@ -6,7 +6,7 @@
     html {
         scroll-behavior: smooth;
     }        
-    .pirmais{
+    .section{
         background-color: #3E5148;
         font-family: "Raleway", sans-serif;
         transition: opacity 0.5s ease-out;
@@ -76,3 +76,4 @@
         pointer-events: auto;
         opacity:1;
       }
+    
