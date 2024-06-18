@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="https://kit.fontawesome.com/9195d81eb9.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>Test</title>
 </head>
 <body>
@@ -49,12 +50,26 @@
 
 
 
-        <div id="section1" class="section">
+
+
+    <div class="header">
         <img class="logo" src="images/logo.png">
+        <div class="header-right">
+        <a href="#contact">Par projektu</a>
+        <a href="#about">Kā tu vari palīdzēt</a>
+        </div>
+    </div>
+
+        <div id="section1" class="section">
         
         
         <h1> Kā mitrāji pasargā no plūdiem</h1>
-        <button  id="presentbutton1">Present Video on Secondary Screen</button>
+
+       
+
+        <div id="presentbutton1" class="container">
+        <i class="fas fa-play"></i>
+        </div>  
         <button onclick="switchSection('section1')">Switch to Next Section</button>
         <h1>Īss apraksts</h1>
         <img class="center" src="images/test1.png">
@@ -68,11 +83,12 @@
         </div>
         
         <div id="section2" class="section" style="display:none;">
-        <img class="logo" src="images/logo.png">
         
         
         <h1> Kā mitrāji attīra ūdeni</h1>
-        <button id="presentbutton2">Present 2nd Video on Secondary Screen</button>
+        <div id="presentbutton2" class="container">
+            <i class="fas fa-play"></i>
+          </div>  
         
         <button onclick="switchSection('section2')">Switch to Next Section</button>
         
@@ -87,11 +103,12 @@
         </div>
         
         <div id="section3" class="section" style="display:none;">
-        <img class="logo" src="images/logo.png">
         
         
         <h1> Kā mitrāji dod ūdeni ilgstošā sausuma periodā</h1>
-        <button id="presentbutton3">Present 3rd Video on Secondary Screen</button>
+        <div id="presentbutton3" class="container">
+            <i class="fas fa-play"></i>
+          </div>  
         
         <button onclick="switchSection('section3')">Switch to Next Section</button>
         
@@ -117,7 +134,7 @@
                 diam nonummy nibh
                 euismod tincidunt ut
                 laoreet dolore magna</h2>
-            <h1 class="right">Kā tu ar savu
+            <h1 class="rightvir">Kā tu ar savu
                 iesaisti vari palīdzēt</h1>
             <h2 class="right">Lorem ipsum dolor sit amet,
                 consectetuer adipiscing elit,

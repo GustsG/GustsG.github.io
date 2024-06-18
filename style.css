@@ -3,6 +3,34 @@
         padding: 0;
         box-sizing: border-box;
     }
+    .header {
+        overflow: hidden;
+        background-color: #3E5148;
+        padding: 20px 10px;
+        font-family: "Raleway", sans-serif;
+      }
+    .header a {
+        float: left;
+        color: #F0EADB;
+        text-align: center;
+        padding: 12px;
+        margin-top: 25px;
+        text-decoration: none;
+        font-size: 22px;
+        line-height: 25px;
+        border-radius: 4px;
+    }   
+      .header-right {
+        float: right;
+    }
+    .header a:hover {
+        background-color: #ddd;
+        color: black;
+    }
+    
+    
+    
+    
     html {
         scroll-behavior: smooth;
     }        
@@ -10,6 +38,7 @@
         background-color: #3E5148;
         font-family: "Raleway", sans-serif;
         transition: opacity 0.5s ease-out;
+        padding-bottom: 200px;
     }
     #otrais{
         background-color: #A2813A;
@@ -18,6 +47,7 @@
     #tresais{
         background-color: #8FBFCA;
         padding-bottom: 200px;
+        padding-top: 200px;
         font-family: "Raleway", sans-serif;
     }
     .logo {
@@ -37,10 +67,17 @@
         margin-right: auto;
         width: 50%;
     }
+    .rightvir {
+        text-align: right;
+        width: 40%;
+        margin-left: auto;
+        margin-top: 200px;
+    }
     .right {
         text-align: right;
         width: 40%;
         margin-left: auto;
+        
     }
     h1 {
         text-align: center;
@@ -76,4 +113,23 @@
         pointer-events: auto;
         opacity:1;
       }
-    
+      .container{
+        display:grid;
+        place-items:center;
+        cursor:pointer;
+        padding:2rem;
+        background:#3E5148;
+        border-radius: 0%;
+        transition:all 0.3s ease-in;
+        
+      }
+      .container .fas{
+        display:grid;
+        place-items:center;
+        font-size:4rem;
+        color:gray;
+      }
+      
+      .container:active .fas{
+        color:#000000;
+      }
