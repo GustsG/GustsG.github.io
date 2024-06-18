@@ -1,67 +1,28 @@
-document.getElementById("playVideoButton").addEventListener("click", function() {
-  var videoUrl = "videos/video.mp4"; // Replace with the URL to your video file
+document.querySelectorAll(".presentButton").forEach(function(button) {
+  button.addEventListener('click', function() {
+  if (!navigator.presentation) {
+      alert('Presentation API not supported on this browser.');
+      return;
+  }
+
+  var presentationRequest = new PresentationRequest(['secondary-screen.html']);
   
-  // Screen dimensions and position
-  var primaryScreenWidth = window.screen.width;
-  var primaryScreenHeight = window.screen.height;
-  var externalScreenLeft = primaryScreenWidth; // Assuming the external screen is to the right of the primary screen
-  var externalScreenTop = 0;
-
-  var videoWindow = window.open("", "VideoWindow", `width=600,height=500,left=${externalScreenLeft},top=${externalScreenTop}`);
-  videoWindow.document.write(`
-      <!DOCTYPE html>
-      <html lang="en">
-      <head>
-          <meta charset="UTF-8">
-          <meta name="viewport" content="width=device-width, initial-scale=1.0">
-          <title>Playing Video</title>
-      </head>
-      <body>
-          <video autoplay id="myVideo" width="100%" height="100%" controls>
-              <source src="${videoUrl}" type="video/mp4">
-              Your browser does not support the video tag.
-          </video>
-      </body>
-      </html>
-  `);
-  videoWindow.document.close();
-
-  // Move the new window to the external screen
-  videoWindow.moveTo(externalScreenLeft, externalScreenTop);
-  videoWindow.resizeTo(primaryScreenWidth, primaryScreenHeight);
+  presentationRequest.start().then(function(presentationConnection) {
+      console.log('Presentation started.', presentationConnection);
+      // Handle the presentation connection state changes
+      presentationConnection.onconnect = function() {
+          console.log('Presentation connected.');
+      };
+      presentationConnection.onterminate = function() {
+          console.log('Presentation terminated.');
+      };
+      presentationReturnValue.onmessage = function(event) {
+          console.log('Message received:', event.data);
+      };
+  }).catch(function(error) {
+      console.error('Unable to start presentation:', error);
+  });
 });
-
-document.getElementById("playVideoButton2").addEventListener("click", function() {
-  var videoUrl = "videos/video.mp4"; // Replace with the URL to your video file
-  
-  // Screen dimensions and position
-  var primaryScreenWidth = window.screen.width;
-  var primaryScreenHeight = window.screen.height;
-  var externalScreenLeft = primaryScreenWidth; // Assuming the external screen is to the right of the primary screen
-  var externalScreenTop = 0;
-
-  var videoWindow = window.open("", "VideoWindow", `width=600,height=500,left=${externalScreenLeft},top=${externalScreenTop}`);
-  videoWindow.document.write(`
-      <!DOCTYPE html>
-      <html lang="en">
-      <head>
-          <meta charset="UTF-8">
-          <meta name="viewport" content="width=device-width, initial-scale=1.0">
-          <title>Playing Video</title>
-      </head>
-      <body>
-          <video autoplay id="myVideo" width="100%" height="100%" controls>
-              <source src="${videoUrl}" type="video/mp4">
-              Your browser does not support the video tag.
-          </video>
-      </body>
-      </html>
-  `);
-  videoWindow.document.close();
-
-  // Move the new window to the external screen
-  videoWindow.moveTo(externalScreenLeft, externalScreenTop);
-  videoWindow.resizeTo(primaryScreenWidth, primaryScreenHeight);
 });
 
 function switchSection() {
@@ -85,5 +46,5 @@ window.addEventListener("scroll", () => {
     } else {
       toTop.classList.remove("active");
     }
-  })
+  });
 
