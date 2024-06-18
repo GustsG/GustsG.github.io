@@ -73,16 +73,9 @@
         
         <h1> Kā mitrāji pasargā no plūdiem (OTRAIS TEKSTS)</h1>
         <button id="presentbutton2">Present 2nd Video on Secondary Screen</button>
-        <script>
-        document.getElementById('presentbutton2').addEventListener('click', function() {
-            if (window.presentationConnection && window.presentationConnection.state === 'connected') {
-                window.presentationConnection.send(JSON.stringify({action: 'play', url: 'videos/video2.mp4'}));
-            } else {
-                console.log('Presentation connection is not established or no longer active.');
-            }
-          });
-        </script>
+        
         <button onclick="switchSection()">Switch Section</button>
+        
         <h1>Īss apraksts</h1>
         <img class="center" src="images/test1.png">
         <h2 class="center">Lorem ipsum dolor sit amet, consectetuer adipiscing
