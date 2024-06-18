@@ -6,7 +6,7 @@
 <body>
 
     <video id="videoElement" controls autoplay muted width="1920" height="1080">
-        <source src="videos/video.mp4" type="video/mp4">
+        <source src="videos/video2.mp4" type="video/mp4">
         Your browser does not support the video tag.
     </video>
 
@@ -21,37 +21,28 @@
     </style>
     <script>
 
-        document.addEventListener('DOMContentLoaded', (event) => {
-            var videoElement = document.getElementById('videoElement');
-
-
-            videoElement.addEventListener('ended', (event) => {
-                // Video has ended, now send a message to close the presentation screen
-                console.log("Video ended. Closing the presentation.");
-                window.close(); // This assumes the browser allows this script to close the page
-            });
-        });
-        
-
-
-
-        // You might want to setup message receiving from the primary screen
-        // to control the video playback or load different videos based on messages.
+if (navigator.presentation.receiver) {
         navigator.presentation.receiver.connectionList.then(function(list) {
-            list.connections.forEach(function(connection) {
-                connection.onmessage = function(event) {
-                    console.log(event.data);
-                    // Here, you could parse event.data to control the video element
-                    // For example, play, pause, or load a new video URL
-                };
-            });
+            list.connections.forEach(addConnection);
             list.onconnectionavailable = function(event) {
-                event.connection.onmessage = function(event) {
-                    console.log(event.data);
-                    // Example of control, similar to above
-                };
+                addConnection(event.connection);
             };
         });
+    }
+
+    function addConnection(connection) {
+        connection.onmessage = function(event) {
+            var data = JSON.parse(event.data);
+            var videoElement = document.getElementById('videoElement');
+
+            if (data.action === 'play') {
+                videoElement.src = data.url;
+                videoElement.play().catch(function(error) {
+                    console.error('Error attempting to play video:', error);
+                });
+            }
+        };
+    }
     </script>
 
 </body>
