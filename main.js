@@ -79,27 +79,33 @@ presentationRequest.getAvailability()
     log('Presentation availability not supported, ' + error.name + ': ' + error.message);
 });
 
+// Function to switch sections
 function switchSection(currentSectionId) {
-  const sections = document.querySelectorAll('.section'); // Select all sections
-  let currentIndex = 0; // Default to show the first if nothing is found
-  // Find the index of the currently active section
-  sections.forEach((section, index) => {
-      if (section.id === currentSectionId) {
-          currentIndex = index;
-      }
-      section.style.display = 'none'; // Hide all sections
-  });
-  // Calculate the next section index
-  const nextIndex = (currentIndex + 1) % sections.length; // Loop back to the first after the last
-  sections[nextIndex].style.display = 'block'; // Show the next section
+    const sections = document.querySelectorAll('.section'); // Select all sections
+    let currentIndex = 0; // Default to show the first if nothing is found
+    // Find the index of the currently active section
+    sections.forEach((section, index) => {
+        if (section.id === currentSectionId) {
+            currentIndex = index;
+        }
+        section.style.display = 'none'; // Hide all sections
+    });
+    // Calculate the next section index
+    const nextIndex = (currentIndex + 1) % sections.length; // Loop back to the first after the last
+    sections[nextIndex].style.display = 'block'; // Show the next section
 }
 
+// "To top" button functionality
 const toTop = document.querySelector(".to-top");
-
 window.addEventListener("scroll", () => {
     if (window.pageYOffset > 100) {
-      toTop.classList.add("active");
+        toTop.classList.add("active");
     } else {
-      toTop.classList.remove("active");
+        toTop.classList.remove("active");
     }
-  });
+});
+
+// Function to log messages
+function log(message) {
+    console.log(message);
+}
