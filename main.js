@@ -45,31 +45,39 @@ document.getElementById('startPresentation').addEventListener('click', function(
     });
 });
 
-
+// Button event listeners to send video play commands
 document.getElementById('presentbutton1').addEventListener('click', function() {
-  if (window.presentationConnection && window.presentationConnection.state === 'connected') {
-      window.presentationConnection.send(JSON.stringify({action: 'play', url: 'videos/video.mp4'}));
-  } else {
-      console.log('Presentation connection is not established or no longer active.');
-  }
+    sendMessageToPresentation({ action: 'play', url: 'videos/video.mp4' });
 });
 
 document.getElementById('presentbutton2').addEventListener('click', function() {
-  if (window.presentationConnection && window.presentationConnection.state === 'connected') {
-      window.presentationConnection.send(JSON.stringify({action: 'play', url: 'videos/video2.mp4'}));
-  } else {
-      console.log('Presentation connection is not established or no longer active.');
-  }
+    sendMessageToPresentation({ action: 'play', url: 'videos/video2.mp4' });
 });
 
 document.getElementById('presentbutton3').addEventListener('click', function() {
-  if (window.presentationConnection && window.presentationConnection.state === 'connected') {
-      window.presentationConnection.send(JSON.stringify({action: 'play', url: 'videos/video3.mp4'}));
-  } else {
-      console.log('Presentation connection is not established or no longer active.');
-  }
+    sendMessageToPresentation({ action: 'play', url: 'videos/video3.mp4' });
 });
 
+// Function to send message to presentation
+function sendMessageToPresentation(message) {
+    if (window.presentationConnection && window.presentationConnection.state === 'connected') {
+        window.presentationConnection.send(JSON.stringify(message));
+    } else {
+        log('Presentation connection is not established or no longer active.');
+    }
+}
+
+// Monitor presentation availability
+presentationRequest.getAvailability()
+.then(availability => {
+    log('Available presentation displays: ' + availability.value);
+    availability.addEventListener('change', function() {
+        log('> Available presentation displays: ' + availability.value);
+    });
+})
+.catch(error => {
+    log('Presentation availability not supported, ' + error.name + ': ' + error.message);
+});
 
 function switchSection(currentSectionId) {
   const sections = document.querySelectorAll('.section'); // Select all sections
