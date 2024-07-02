@@ -36,8 +36,7 @@ feature_id: 6676265876586496
   }
 
   // Initialize PresentationRequest with Cast URL
-    const customCastURL = 'https://www.youtube.com/';
-    const presentationRequest = new PresentationRequest(customCastURL);
+  const presentationRequest = new PresentationRequest('secondary-screen.html');
 
   // Set this as the default presentation request in the browser Cast menu
   navigator.presentation.defaultRequest = presentationRequest;
