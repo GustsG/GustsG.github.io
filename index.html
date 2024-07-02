@@ -36,7 +36,8 @@ feature_id: 6676265876586496
   }
 
   // Initialize PresentationRequest with Cast URL
-  const presentationRequest = new PresentationRequest('cast:EF1A139F');
+    const customCastURL = 'https://www.youtube.com/';
+    const presentationRequest = new PresentationRequest(customCastURL);
 
   // Set this as the default presentation request in the browser Cast menu
   navigator.presentation.defaultRequest = presentationRequest;
