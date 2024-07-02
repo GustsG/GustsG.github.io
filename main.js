@@ -1,111 +1,81 @@
-// App ID EF1A139F is registered in the Google Cast SDK Developer Console
-// and points to the following custom receiver:
-// https://googlechrome.github.io/samples/presentation-api/receiver/index.html
-const presentationRequest = new PresentationRequest('cast:EF1A139F');
+var presentationRequest;
 
-// Make this presentation the default one when using the "Cast" browser menu.
-navigator.presentation.defaultRequest = presentationRequest;
+    document.getElementById('startPresentation').addEventListener('click', function() {
+        if (!navigator.presentation) {
+            alert('Presentation API not supported on this browser.');
+            return;
+        }
 
-let presentationConnection;
+        presentationRequest = new PresentationRequest(['secondary-screen.html']);
+        
+        presentationRequest.start().then(function(presentationConnection) {
+            console.log('Presentation started. Connection ID:', presentationConnection.id);
 
-// Start presentation on button click
-document.getElementById('startPresentation').addEventListener('click', function() {
-    if (!navigator.presentation) {
-        alert('Presentation API not supported on this browser.');
-        return;
-    }
+            presentationConnection.onconnect = function() {
+                console.log('Presentation connected.');
+            };
 
-    log('Starting presentation request...');
-    presentationRequest.start()
-    .then(connection => {
-        presentationConnection = connection;
-        log('> Connected to ' + connection.url + ', id: ' + connection.id);
+            presentationConnection.onterminate = function() {
+                console.log('Presentation terminated.');
+            };
 
-        connection.addEventListener('connect', function() {
-            log('Presentation connected.');
+            presentationConnection.onmessage = function(event) {
+                console.log('Message received:', event.data);
+            };
+
+            // Save the connection object for later use
+            window.presentationConnection = presentationConnection;
+        }).catch(function(error) {
+            console.error('Unable to start presentation:', error);
         });
-
-        connection.addEventListener('close', function() {
-            log('Presentation closed.');
-        });
-
-        connection.addEventListener('terminate', function() {
-            log('Presentation terminated.');
-        });
-
-        connection.addEventListener('message', function(event) {
-            log('Message received:', event.data);
-        });
-
-        // Save the connection object for later use
-        window.presentationConnection = connection;
-    })
-    .catch(error => {
-        log('Unable to start presentation:', error);
-    });
 });
 
-// Button event listeners to send video play commands
 document.getElementById('presentbutton1').addEventListener('click', function() {
-    sendMessageToPresentation({ action: 'play', url: 'videos/video.mp4' });
+  if (window.presentationConnection && window.presentationConnection.state === 'connected') {
+      window.presentationConnection.send(JSON.stringify({action: 'play', url: 'videos/video.mp4'}));
+  } else {
+      console.log('Presentation connection is not established or no longer active.');
+  }
 });
 
 document.getElementById('presentbutton2').addEventListener('click', function() {
-    sendMessageToPresentation({ action: 'play', url: 'videos/video2.mp4' });
+  if (window.presentationConnection && window.presentationConnection.state === 'connected') {
+      window.presentationConnection.send(JSON.stringify({action: 'play', url: 'videos/video2.mp4'}));
+  } else {
+      console.log('Presentation connection is not established or no longer active.');
+  }
 });
 
 document.getElementById('presentbutton3').addEventListener('click', function() {
-    sendMessageToPresentation({ action: 'play', url: 'videos/video3.mp4' });
+  if (window.presentationConnection && window.presentationConnection.state === 'connected') {
+      window.presentationConnection.send(JSON.stringify({action: 'play', url: 'videos/video3.mp4'}));
+  } else {
+      console.log('Presentation connection is not established or no longer active.');
+  }
 });
 
-// Function to send message to presentation
-function sendMessageToPresentation(message) {
-    if (window.presentationConnection && window.presentationConnection.state === 'connected') {
-        window.presentationConnection.send(JSON.stringify(message));
-    } else {
-        log('Presentation connection is not established or no longer active.');
-    }
-}
 
-// Monitor presentation availability
-presentationRequest.getAvailability()
-.then(availability => {
-    log('Available presentation displays: ' + availability.value);
-    availability.addEventListener('change', function() {
-        log('> Available presentation displays: ' + availability.value);
-    });
-})
-.catch(error => {
-    log('Presentation availability not supported, ' + error.name + ': ' + error.message);
-});
-
-// Function to switch sections
 function switchSection(currentSectionId) {
-    const sections = document.querySelectorAll('.section'); // Select all sections
-    let currentIndex = 0; // Default to show the first if nothing is found
-    // Find the index of the currently active section
-    sections.forEach((section, index) => {
-        if (section.id === currentSectionId) {
-            currentIndex = index;
-        }
-        section.style.display = 'none'; // Hide all sections
-    });
-    // Calculate the next section index
-    const nextIndex = (currentIndex + 1) % sections.length; // Loop back to the first after the last
-    sections[nextIndex].style.display = 'block'; // Show the next section
+  const sections = document.querySelectorAll('.section'); // Select all sections
+  let currentIndex = 0; // Default to show the first if nothing is found
+  // Find the index of the currently active section
+  sections.forEach((section, index) => {
+      if (section.id === currentSectionId) {
+          currentIndex = index;
+      }
+      section.style.display = 'none'; // Hide all sections
+  });
+  // Calculate the next section index
+  const nextIndex = (currentIndex + 1) % sections.length; // Loop back to the first after the last
+  sections[nextIndex].style.display = 'block'; // Show the next section
 }
 
-// "To top" button functionality
 const toTop = document.querySelector(".to-top");
+
 window.addEventListener("scroll", () => {
     if (window.pageYOffset > 100) {
-        toTop.classList.add("active");
+      toTop.classList.add("active");
     } else {
-        toTop.classList.remove("active");
+      toTop.classList.remove("active");
     }
-});
-
-// Function to log messages
-function log(message) {
-    console.log(message);
-}
+  });
