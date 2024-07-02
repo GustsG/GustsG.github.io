@@ -1,34 +1,50 @@
-var presentationRequest;
+// App ID EF1A139F is registered in the Google Cast SDK Developer Console
+// and points to the following custom receiver:
+// https://googlechrome.github.io/samples/presentation-api/receiver/index.html
+const presentationRequest = new PresentationRequest('cast:EF1A139F');
 
-    document.getElementById('startPresentation').addEventListener('click', function() {
-        if (!navigator.presentation) {
-            alert('Presentation API not supported on this browser.');
-            return;
-        }
+// Make this presentation the default one when using the "Cast" browser menu.
+navigator.presentation.defaultRequest = presentationRequest;
 
-        presentationRequest = new PresentationRequest(['secondary-screen.html']);
-        
-        presentationRequest.start().then(function(presentationConnection) {
-            console.log('Presentation started. Connection ID:', presentationConnection.id);
+let presentationConnection;
 
-            presentationConnection.onconnect = function() {
-                console.log('Presentation connected.');
-            };
+// Start presentation on button click
+document.getElementById('startPresentation').addEventListener('click', function() {
+    if (!navigator.presentation) {
+        alert('Presentation API not supported on this browser.');
+        return;
+    }
 
-            presentationConnection.onterminate = function() {
-                console.log('Presentation terminated.');
-            };
+    log('Starting presentation request...');
+    presentationRequest.start()
+    .then(connection => {
+        presentationConnection = connection;
+        log('> Connected to ' + connection.url + ', id: ' + connection.id);
 
-            presentationConnection.onmessage = function(event) {
-                console.log('Message received:', event.data);
-            };
-
-            // Save the connection object for later use
-            window.presentationConnection = presentationConnection;
-        }).catch(function(error) {
-            console.error('Unable to start presentation:', error);
+        connection.addEventListener('connect', function() {
+            log('Presentation connected.');
         });
+
+        connection.addEventListener('close', function() {
+            log('Presentation closed.');
+        });
+
+        connection.addEventListener('terminate', function() {
+            log('Presentation terminated.');
+        });
+
+        connection.addEventListener('message', function(event) {
+            log('Message received:', event.data);
+        });
+
+        // Save the connection object for later use
+        window.presentationConnection = connection;
+    })
+    .catch(error => {
+        log('Unable to start presentation:', error);
+    });
 });
+
 
 document.getElementById('presentbutton1').addEventListener('click', function() {
   if (window.presentationConnection && window.presentationConnection.state === 'connected') {
