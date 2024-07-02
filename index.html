@@ -1,139 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <script src="https://kit.fontawesome.com/9195d81eb9.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <title>Test</title>
-</head>
-<body>
-    
-    
-    <button id="startPresentation">Start Presentation</button>
-
-
-
-
-
-
-    <div class="header">
-        <img class="logo" src="images/logo.png">
-        <div class="header-right">
-        <a href="#about">Par projektu</a>
-        <a href="#help">Kā tu vari palīdzēt</a>
-        </div>
-    </div>
-
-        <div id="section1" class="section">
-        
-        
-        <h1> Kā mitrāji pasargā no plūdiem</h1>
-        
-       
-
-        <div id="presentbutton1" class="container">
-        <i class="fas fa-play"></i>
-        </div>  
-        <h1>Īss apraksts</h1>
-        
-        <div class="content-container">
-            <img src="images/test1.png" class="logo">
-            <button class="action-button" onclick="switchSection('section1');">
-                <i class="fas fa-chevron-right"></i>
-            </button>
-        </div>
-          <h2 class="center">Lorem ipsum dolor sit amet, consectetuer adipiscing
-            elit, sed diam nonummy nibh euismod tincidunt ut
-            laoreet dolore magna aliquam erat volutpat. ŠIS IR PIRMAIS TEKSTS!!!! Ut wisi
-            enim ad minim veniam, quis nostrud exerci tation
-            ullamcorper suscipit lobortis nisl ut aliquip ex ea
-            commodo consequat. ŠIS IR PIRMAIS TEKSTS!!!! vel eum iriure dolor</h2>
-
-        </div>
-        
-        <div id="section2" class="section" style="display:none;">
-        
-        
-        <h1> Kā mitrāji attīra ūdeni</h1>
-        <div id="presentbutton2" class="container">
-            <i class="fas fa-play"></i>
-          </div>  
-        
-        
-        <h1>Īss apraksts</h1>
-        <div class="content-container">
-            <img src="images/test1.png" class="logo">
-            <button class="action-button" onclick="switchSection('section2')">
-                <i class="fas fa-chevron-right"></i>
-            </button>
-        </div>
-        <h2 class="center">ŠIS IR OTRAIS TEKSTS!!!! Lorem ipsum dolor sit amet, consectetuer adipiscing
-            elit, sed diam nonummy nibh euismod tincidunt ut
-            laoreet dolore magna aliquam erat volutpat. ŠIS IR OTRAIS TEKSTS!!!! Ut wisi
-            enim ad minim veniam, quis nostrud exerci tation
-            ullamcorper suscipit lobortis nisl ut aliquip ex ea
-            commodo consequat. Duis autem vel eum iriure dolor</h2>
-        </div>
-        
-        <div id="section3" class="section" style="display:none;">
-        
-        
-        <h1> Kā mitrāji dod ūdeni ilgstošā sausuma periodā</h1>
-        <div id="presentbutton3" class="container">
-            <i class="fas fa-play"></i>
-          </div>  
-        
-        
-        <h1>Īss apraksts</h1>
-        <div class="content-container">
-            <img src="images/test1.png" class="logo">
-            <button class="action-button" onclick="switchSection('section3')">
-                <i class="fas fa-chevron-right"></i>
-            </button>
-        </div>
-        <h2 class="center">Lorem ipsum dolor sit amet, consectetuer adipiscing
-            elit, ŠIS IR TREŠAIS TEKSTS!!! nonummy nibh euismod tincidunt ut
-            laoreet dolore magna aliquam erat volutpat. ŠIS IR TREŠAIS TEKSTS!!!! Ut wisi
-            enim ad minim veniam, quis nostrud exerci tation
-            ullamcorper suscipit lobortis nisl ut aliquip ex ea
-            commodo consequat.ŠIS IR TREŠAIS TEKSTS!!! vel eum iriure dolor</h2>
-        </div>
-
-
-
-    
-        <div id="about">
-    
-            <h1 class="left">Informācija par projektu</h1>
-            <h2 class="left">Lorem ipsum dolor sit
-                amet, consectetuer
-                adipiscing elit, sed
-                diam nonummy nibh
-                euismod tincidunt ut
-                laoreet dolore magna</h2>
-            <h1 class="rightvir">Kā tu ar savu
-                iesaisti vari palīdzēt</h1>
-            <h2 class="right">Lorem ipsum dolor sit amet,
-                consectetuer adipiscing elit,
-                sed diam nonummy nibh
-                euismod tincidunt ut laoreet
-                dolore magna aliquam erat
-                volutpat. Ut wisi enim ad</h2>
-        </div>
-    
-        <div id="help">
-            <h1>Vairāk par projektu lasi šeit</h1>
-            <h1>webadrese</h1>
-        </div>
-
-        <a href="#" class="to-top">
-            <i class="fas fa-chevron-up"></i>
-          </a>
-        
-          <script src="main.js"></script>
-
-</body>
-</html>
+<!-- controller.html -->
+<button id="presentBtn" style="display: none;">Present</button>
+<script>
+  // The Present button is visible if at least one presentation display is available
+  var presentBtn = document.getElementById("presentBtn");
+  // It is also possible to use relative presentation URL e.g. "presentation.html"
+  var presUrls = ["https://example.com/presentation.html",
+                  "https://example.net/alternate.html"];
+  // show or hide present button depending on display availability
+  var handleAvailabilityChange = function(available) {
+    presentBtn.style.display = available ? "inline" : "none";
+  };
+  // Promise is resolved as soon as the presentation display availability is
+  // known.
+  var request = new PresentationRequest(presUrls);
+  request.getAvailability().then(function(availability) {
+    // availability.value may be kept up-to-date by the controlling UA as long
+    // as the availability object is alive. It is advised for the Web developers
+    // to discard the object as soon as it's not needed.
+    handleAvailabilityChange(availability.value);
+    availability.onchange = function() { handleAvailabilityChange(this.value); };
+  }).catch(function() {
+    // Availability monitoring is not supported by the platform, so discovery of
+    // presentation displays will happen only after request.start() is called.
+    // Pretend the devices are available for simplicity; or, one could implement
+    // a third state for the button.
+    handleAvailabilityChange(true);
+  });
+</script>
