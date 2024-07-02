@@ -1,103 +1,139 @@
----
-feature_name: Presentation Controller API (Google Cast)
-chrome_version: 63
-feature_id: 6676265876586496
----
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://kit.fontawesome.com/9195d81eb9.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Test</title>
+</head>
+<body>
+    
+    
+    <button id="startPresentation">Start Presentation</button>
 
-<h3>Background</h3>
 
-<p>
-  This sample illustrates the use of
-  <a href="https://w3c.github.io/presentation-api/">Presentation API</a>,
-  which gives the ability to access external presentation-type displays and use
-  them for presenting web content. The <code>PresentationRequest</code> object
-  is associated with a request to initiate a presentation, taking a presentation URL when constructed.
-  A presentation is started using the <code>start()</code> method on the <code>PresentationRequest</code> object.
-</p>
 
-<p>
-  Note that this demo uses a <code>cast:</code> URL to start the presentation
-  instead of the receiver page's URL. This will load the receiver page on a
-  Chromecast, but the sender page won't communicate with it as Chromecast doesn't support the Presentation Receiver API.
-</p>
 
-<p>
-  <button id="start">Start Presentation</button>
-  <button id="close">Close Connection</button>
-  <button id="terminate">Terminate Connection</button>
-</p>
 
-<div id="log"></div>
 
-<script>
-  // Helper function for logging messages
-  function log(message) {
-    document.getElementById('log').innerHTML += '<p>' + message + '</p>';
-  }
+    <div class="header">
+        <img class="logo" src="images/logo.png">
+        <div class="header-right">
+        <a href="#about">Par projektu</a>
+        <a href="#help">Kā tu vari palīdzēt</a>
+        </div>
+    </div>
 
-  // Initialize PresentationRequest with Cast URL
-  const presentationRequest = new PresentationRequest('secondary-screen.html');
+        <div id="section1" class="section">
+        
+        
+        <h1> Kā mitrāji pasargā no plūdiem</h1>
+        
+       
 
-  // Set this as the default presentation request in the browser Cast menu
-  navigator.presentation.defaultRequest = presentationRequest;
+        <div id="presentbutton1" class="container">
+        <i class="fas fa-play"></i>
+        </div>  
+        <h1>Īss apraksts</h1>
+        
+        <div class="content-container">
+            <img src="images/test1.png" class="logo">
+            <button class="action-button" onclick="switchSection('section1');">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+          <h2 class="center">Lorem ipsum dolor sit amet, consectetuer adipiscing
+            elit, sed diam nonummy nibh euismod tincidunt ut
+            laoreet dolore magna aliquam erat volutpat. ŠIS IR PIRMAIS TEKSTS!!!! Ut wisi
+            enim ad minim veniam, quis nostrud exerci tation
+            ullamcorper suscipit lobortis nisl ut aliquip ex ea
+            commodo consequat. ŠIS IR PIRMAIS TEKSTS!!!! vel eum iriure dolor</h2>
 
-  // Event listener for starting presentation
-  document.querySelector('#start').addEventListener('click', async function() {
-    log('Starting presentation request...');
-    try {
-      const connection = await presentationRequest.start();
-      log('> Connected to ' + connection.url + ', id: ' + connection.id);
-      
-      // Store the connection for further interactions
-      setupPresentationConnection(connection);
-    } catch (error) {
-      log('Error starting presentation: ' + error.name + ': ' + error.message);
-    }
-  });
+        </div>
+        
+        <div id="section2" class="section" style="display:none;">
+        
+        
+        <h1> Kā mitrāji attīra ūdeni</h1>
+        <div id="presentbutton2" class="container">
+            <i class="fas fa-play"></i>
+          </div>  
+        
+        
+        <h1>Īss apraksts</h1>
+        <div class="content-container">
+            <img src="images/test1.png" class="logo">
+            <button class="action-button" onclick="switchSection('section2')">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+        <h2 class="center">ŠIS IR OTRAIS TEKSTS!!!! Lorem ipsum dolor sit amet, consectetuer adipiscing
+            elit, sed diam nonummy nibh euismod tincidunt ut
+            laoreet dolore magna aliquam erat volutpat. ŠIS IR OTRAIS TEKSTS!!!! Ut wisi
+            enim ad minim veniam, quis nostrud exerci tation
+            ullamcorper suscipit lobortis nisl ut aliquip ex ea
+            commodo consequat. Duis autem vel eum iriure dolor</h2>
+        </div>
+        
+        <div id="section3" class="section" style="display:none;">
+        
+        
+        <h1> Kā mitrāji dod ūdeni ilgstošā sausuma periodā</h1>
+        <div id="presentbutton3" class="container">
+            <i class="fas fa-play"></i>
+          </div>  
+        
+        
+        <h1>Īss apraksts</h1>
+        <div class="content-container">
+            <img src="images/test1.png" class="logo">
+            <button class="action-button" onclick="switchSection('section3')">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+        <h2 class="center">Lorem ipsum dolor sit amet, consectetuer adipiscing
+            elit, ŠIS IR TREŠAIS TEKSTS!!! nonummy nibh euismod tincidunt ut
+            laoreet dolore magna aliquam erat volutpat. ŠIS IR TREŠAIS TEKSTS!!!! Ut wisi
+            enim ad minim veniam, quis nostrud exerci tation
+            ullamcorper suscipit lobortis nisl ut aliquip ex ea
+            commodo consequat.ŠIS IR TREŠAIS TEKSTS!!! vel eum iriure dolor</h2>
+        </div>
 
-  // Function to set up presentation connection
-  function setupPresentationConnection(connection) {
-    presentationConnection = connection;
-    presentationConnection.addEventListener('close', function() {
-      log('> Connection closed.');
-    });
-    presentationConnection.addEventListener('terminate', function() {
-      log('> Connection terminated.');
-    });
-  }
 
-  // Event listener for closing connection
-  document.querySelector('#close').addEventListener('click', function() {
-    if (presentationConnection) {
-      log('Closing connection...');
-      presentationConnection.close();
-    } else {
-      log('No active presentation connection to close.');
-    }
-  });
 
-  // Event listener for terminating connection
-  document.querySelector('#terminate').addEventListener('click', function() {
-    if (presentationConnection) {
-      log('Terminating connection...');
-      presentationConnection.terminate();
-    } else {
-      log('No active presentation connection to terminate.');
-    }
-  });
+    
+        <div id="about">
+    
+            <h1 class="left">Informācija par projektu</h1>
+            <h2 class="left">Lorem ipsum dolor sit
+                amet, consectetuer
+                adipiscing elit, sed
+                diam nonummy nibh
+                euismod tincidunt ut
+                laoreet dolore magna</h2>
+            <h1 class="rightvir">Kā tu ar savu
+                iesaisti vari palīdzēt</h1>
+            <h2 class="right">Lorem ipsum dolor sit amet,
+                consectetuer adipiscing elit,
+                sed diam nonummy nibh
+                euismod tincidunt ut laoreet
+                dolore magna aliquam erat
+                volutpat. Ut wisi enim ad</h2>
+        </div>
+    
+        <div id="help">
+            <h1>Vairāk par projektu lasi šeit</h1>
+            <h1>webadrese</h1>
+        </div>
 
-  /* Availability monitoring */
+        <a href="#" class="to-top">
+            <i class="fas fa-chevron-up"></i>
+          </a>
+        
+          <script src="main.js"></script>
 
-  // Check and monitor availability of presentation displays
-  presentationRequest.getAvailability()
-    .then(availability => {
-      log('Available presentation displays: ' + availability.value);
-      availability.addEventListener('change', function() {
-        log('> Available presentation displays: ' + availability.value);
-      });
-    })
-    .catch(error => {
-      log('Presentation availability not supported, ' + error.name + ': ' +
-        error.message);
-    });
-</script>
+</body>
+</html>
