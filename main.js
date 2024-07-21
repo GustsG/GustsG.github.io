@@ -48,7 +48,7 @@ function startPresentation() {
         };
 
         // Save the connection object for later use
-        window.presentationConnection = presentationSquareConnection;
+        window.presentationConnection = presentationConnection;
     }).catch(function(error) {
         console.error('Unable to start presentation:', error);
     });
