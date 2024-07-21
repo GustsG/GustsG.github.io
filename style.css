@@ -28,7 +28,14 @@
         color: black;
     }
     
+    html {
+        overflow-y: scroll; /* This ensures the page is still scrollable */
+        scrollbar-width: none; /* For Firefox */
+    }
     
+    html::-webkit-scrollbar {
+        display: none; /* For Webkit (Chrome, Safari, etc.) */
+    }
     
     
     html {
@@ -45,13 +52,27 @@
         font-family: "Raleway", sans-serif;
     }
     #help{
+        position: relative;
+        width: 100%;
         background-color: #8FBFCA;
         padding-bottom: 200px;
-        padding-top: 200px;
         font-family: "Raleway", sans-serif;
     }
+    .info-bottom-left {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+    }
+    
+    .info-top-right {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 50px;
+    }
+
     .logo {
-        margin-top: 10px;
+        margin-top: -25px;
         margin-left: 10px;
         width: 170px;
         border-radius: 10px;
@@ -86,8 +107,11 @@
     }
     h2{
         color: #F0EADB;
+        margin: auto;
+        text-align: center;
         font-weight: normal;
-        padding: 60px;
+        padding: 10px;
+        width: 75%;
     }
     .to-top {
         background: white;
