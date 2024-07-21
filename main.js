@@ -1,34 +1,58 @@
 var presentationRequest;
+var holdTimer;
 
-    document.getElementById('startPresentation').addEventListener('click', function() {
-        if (!navigator.presentation) {
-            alert('Presentation API not supported on this browser.');
-            return;
-        }
+document.getElementById('startPresentation').addEventListener('mousedown', startHold);
+document.getElementById('startPresentation').addEventListener('touchstart', startHold);
 
-        presentationRequest = new PresentationRequest(['secondary-screen.html']);
-        
-        presentationRequest.start().then(function(presentationConnection) {
-            console.log('Presentation started. Connection ID:', presentationConnection.id);
+// Cancel the hold action if the mouse is released or touch ends
+document.getElementById('startPresentation').addEventListener('mouseup', cancelHold);
+document.getElementById('startPresentation').addEventListener('touchend', cancelHold);
 
-            presentationConnection.onconnect = function() {
-                console.log('Presentation connected.');
-            };
+function startHold(event) {
+    // Prevent default link action
+    event.preventDefault();
 
-            presentationConnection.onterminate = function() {
-                console.log('Presentation terminated.');
-            };
+    // Start the timer for 3 seconds (3000 milliseconds)
+    holdTimer = setTimeout(() => {
+        // Your existing function to start the presentation
+        startPresentation();
+    }, 3000);
+}
 
-            presentationConnection.onmessage = function(event) {
-                console.log('Message received:', event.data);
-            };
+function cancelHold() {
+    // Clear the hold timer if it's not held long enough
+    clearTimeout(holdTimer);
+}
 
-            // Save the connection object for later use
-            window.presentationConnection = presentationConnection;
-        }).catch(function(error) {
-            console.error('Unable to start presentation:', error);
-        });
-});
+function startPresentation() {
+    if (!navigator.presentation) {
+        alert('Presentation API not supported on this browser.');
+        return;
+    }
+
+    presentationRequest = new PresentationRequest(['secondary-screen.html']);
+
+    presentationRequest.start().then(function(presentationConnection) {
+        console.log('Presentation started. Connection ID:', presentationConnection.id);
+
+        presentationConnection.onconnect = function() {
+            console.log('Presentation connected.');
+        };
+
+        presentationConnection.onterminate = function() {
+            console.log('Presentation terminated.');
+        };
+
+        presentationConnection.onmessage = function(event) {
+            console.log('Message received:', event.data);
+        };
+
+        // Save the connection object for later use
+        window.presentationConnection = presentationSquareConnection;
+    }).catch(function(error) {
+        console.error('Unable to start presentation:', error);
+    });
+}
 
 document.getElementById('presentbutton1').addEventListener('click', function() {
   if (window.presentationConnection && window.presentationConnection.state === 'connected') {
@@ -79,3 +103,5 @@ window.addEventListener("scroll", () => {
       toTop.classList.remove("active");
     }
   });
+
+
