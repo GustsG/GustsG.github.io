@@ -42,12 +42,26 @@
         scroll-behavior: smooth;
     }        
     .section{
-        background-color: #3E5148;
+        background-color: #415149ff;
+        font-family: "Raleway", sans-serif;
+        transition: opacity 0.5s ease-out;
+        padding-bottom: 100px;
+    }
+    #explanation{
+        background-color: #415149ff;
         font-family: "Raleway", sans-serif;
         transition: opacity 0.5s ease-out;
         padding-bottom: 200px;
     }
     #about{
+        position: relative;
+        width: 100%;
+        background-color: #A2813A;
+        font-family: "Raleway", sans-serif;
+    }
+    #about2{
+        position: relative;
+        width: 100%;
         background-color: #A2813A;
         font-family: "Raleway", sans-serif;
     }
