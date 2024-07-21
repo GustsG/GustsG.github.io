@@ -70,14 +70,6 @@ document.getElementById('presentbutton2').addEventListener('click', function() {
   }
 });
 
-document.getElementById('presentbutton3').addEventListener('click', function() {
-  if (window.presentationConnection && window.presentationConnection.state === 'connected') {
-      window.presentationConnection.send(JSON.stringify({action: 'play', url: 'videos/video3.mp4'}));
-  } else {
-      console.log('Presentation connection is not established or no longer active.');
-  }
-});
-
 
 function switchSection(currentSectionId) {
   const sections = document.querySelectorAll('.section'); // Select all sections
