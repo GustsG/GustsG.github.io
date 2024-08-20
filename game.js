@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('score').innerText = 'Score: ' + score;
     }
 
-    let timeLeft = 10; // Time in seconds
+    let timeLeft = 30; // Time in seconds
     const timerDisplay = document.getElementById('timer');
 
     // Function to start the countdown timer
