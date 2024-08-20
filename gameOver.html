@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Over</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h2 id="final-score">Spēle beigusies! Your score: </h2>
+    <button onclick="startNewGame()">Start New Game</button>
+    <h3>Leaderboard</h3>
+    <ul id="leaderboard"></ul>
+
+    <script>
+      function getScoreFromURL() {
+          const queryString = window.location.search;
+          const urlParams = new URLSearchParams(queryString);
+          const score = urlParams.get('score');
+          document.getElementById('final-score').innerText += score ? score : 'N/A';
+      }
+
+      function displayLeaderboard() {
+    const leaderboard = JSON.parse(localStorage.getItem('leaderboard')) || [];
+    const listElement = document.getElementById('leaderboard');
+
+    leaderboard.forEach(entry => {
+        const li = document.createElement('li');
+        
+        // Using toLocaleString() to get both date and time
+        li.textContent = `Score: ${entry.score} - Date & Time: ${new Date(entry.timestamp).toLocaleString()}`;
+        
+        // Alternatively, for more control over the format, use a combination of toLocaleDateString() and toLocaleTimeString()
+        // li.textContent = `Score: ${entry.score} - Date: ${new Date(entry.timestamp).toLocaleDateString()} Time: ${new Date(entry.timestamp).toLocaleTimeString()}`;
+        
+        listElement.appendChild(li);
+    });
+    }   
+
+      function startNewGame() {
+          window.location.href = 'index.html'; // Adjust if your game's entry point has a different filename
+      }
+
+      getScoreFromURL();
+      displayLeaderboard();
+    </script>
+</body>
+</html>
