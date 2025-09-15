@@ -3,195 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Click Game</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Password Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        #password {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
-<<<<<<< HEAD
-    <div id="game-container"></div>
-    <h2 id="score">Score: 0</h2>
-    <h2 id="timer">Timer: 30</h2> <!-- Timer display, assuming a 30 seconds game -->
-    <script src="game.js"></script> <!-- Include your game's JavaScript file once -->
-=======
-    <div class="header">
-        <a href="javascript:void(0);" id="startPresentation"><img class="logo" src="images/logo.png" style="width: 250px;"></a>
-        <div class="header-right">
-            <a href="#about">Par projektu</a>
-            <a href="#about2">Kāpēc mitrāji ir svarīgi?</a>
-        </div>
-    </div>
 
-    <div id="section1" class="section" style="position: relative;">   
-        <div class="content-container" style="position: relative;">
-            <img src="images/image1.png" class="logo" style="width: 100%; height: auto;">
-            
-            <!-- Centered play button -->
-            <div id="presentbutton1" class="container" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 2;">
-                <i class="fas fa-play" style="font-size: 24px; color: white;"></i>
-            </div>
-            
-            <!-- Right navigation button -->
-            <button class="action-button" onclick="switchSection('section0');" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); ">
-                <i class="fas fa-chevron-right"></i>
-            </button>
-    
-            <!-- New Left navigation button -->
-            <button class="action-button" onclick="switchSection('section0');" style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); z-index: 1;">
-                <i class="fas fa-chevron-left"></i>
-            </button>
-        </div>
-        <h1> Kā mitrāji attīra ūdeni</h1>     
-        
-        <h2>Šeit ir redzami mitrāji - upes paliene un vecupes posms. Gan vecupe, gan upes palienes pļava dabā darbojas kā filtrs, kas attīra piesārņoto ūdeni. Kā? Lietum līstot, ūdens ātrums samazinās, jo ceļā ir augi, krūmi un citi šķēršļi. Šie šķēršļi ļauj ūdenim plūst lēnāk un piesārņojuma un barības vielu daļiņām nosēsties un iesūkties augsnē.</h2>
-            
-        <h2>Kad piesārņojums nonāk augsnē, tā noārdīšanā un piesaistē notiek dažādi sarežģīti procesi, kas ir raksturīgi tieši mitrājiem. Augu saknes daļu piesārņojuma uzņem un pārveido sev nepieciešamās vielās. Savukārt pārējais piesārņojums "nosēžas" nogulumos, kur tas vai nu tiek noglabāts, vai to pamazām noārda mikroorganismi.</h2>
-        <h2>Tā mitrāji nodrošina, ka "netīrais" ūdens neaizplūst tālāk un nepiesārņo upes, ezerus vai pazemes ūdeņus.</h2>
-    </div>
-        
-        
-    <div id="section2" class="section" style="display:none;">
-        <div class="content-container" style="position: relative;">
-            <img src="images/image2.png" class="logo" style="width: 100%; height: auto;">
-            
-            <!-- Centered play button -->
-            <div id="presentbutton2" class="container" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 2;">
-                <i class="fas fa-play" style="font-size: 24px; color: white;"></i>
-            </div>
-            
-            <!-- Right navigation button -->
-            <button class="action-button" onclick="switchSection('section2');" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); ">
-                <i class="fas fa-chevron-right"></i>
-            </button>
-    
-            <!-- New Left navigation button -->
-            <button class="action-button" onclick="switchSection('section2');" style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); z-index: 1;">
-                <i class="fas fa-chevron-left"></i>
-            </button>
-        </div>
-        <h1 style="width: 50%; margin: auto"> Kā mitrāji nodrošina dabisku aizsardzību pret plūdiem?</h1>  
-        <h2>Ziemā, kūstot ledum upē, noris pavasara pali un applūst upes paliene. Mitrājs, tostarp attēlā redzamā upes paliene un vecupe, uzkrāj sevī pavasara palu vai spēcīgu lietavu ūdeņus, bet atbrīvo tos lēnām, darbojoties kā liels sūklis un tā veidojot dabisku ūdens aiztures zonu, kas pasargā no applūšanas apdzīvotas teritorijas upes lejtecē.</h2>
-        <h2>Apgabalos, kur mitrāji ir izzuduši, var būtiski palielināties plūdu risks.</h2>
-    </div>
+    <h1>Password Generator</h1>
+    <input type="text" id="password" placeholder="Your generated password will appear here" readonly>
+    <br><br>
+    <button onclick="generatePassword()">Generate Password</button>
 
-    <div id="explanation">
-        <h1> Ko dara mitrāji?</h1>
-        <style>
-            .row {
-              display: flex;
-              justify-content: space-around;
-              margin-bottom: 20px; /* Adjusts space between rows */
-              margin-left: 150px;
-              margin-right: 150px;;
+    <script>
+        function generatePassword() {
+            var length = 12,
+                charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$",
+                retVal = "";
+            for (var i = 0, n = charset.length; i < length; ++i) {
+                retVal += charset.charAt(Math.floor(Math.random() * n));
             }
-            
-            .element {
-              display: flex;
-              align-items: left;
-              width: 48%;
-            }
-            
-        </style>
+            document.getElementById("password").value = retVal;
+        }
+    </script>
 
-          
-        <div class="row">
-            <div class="element">
-                <img src="images/smallImage1.png" style="width: 180px;">
-                <div class="text">
-                    <h2 style="text-align: left; font-size: 2em;"><b>Attīra ūdeni</b></h2>
-                    <h2 style="text-align: left;">Augi un augsne filtrē piesārņojumu un barības vielas</h2>
-                </div>
-            </div>
-            <div class="element">
-                <img src="images/smallImage2.png" style="width: 180px;">
-                <div class="text">
-                    <h2 style="text-align: left; font-size: 2em;"><b>Uztur dabas daudzveidību</b></h2>
-                    <h2 style="text-align: left;">Dzīvotne dažādiem augiem un dzīvniekiem</h2>
-                </div>
-            </div>
-        </div>
-          
-        <div class="row">
-            <div class="element">
-                <img src="images/smallImage3.png" style="width: 180px;">
-                <div class="text">
-                    <h2 style="text-align: left; font-size: 2em;"><b>Aizsargā pret plūdiem</b></h2>
-                    <h2 style="text-align: left;">Uzkrāj ūdeni kā sūklis un regulē ūdens līmeni upēs un ezeros</h2>
-                </div>
-            </div>
-            <div class="element">
-                <img src="images/smallImage4.png" style="width: 180px;">
-                <div class="text">
-                    <h2 style="text-align: left; font-size: 2em;"><b>Mazina klimata pārmaiņas</b></h2>
-                    <h2 style="text-align: left;">Uzkrāj oglekli un ietekmē vietējo klimatu</h2>
-                </div>
-            </div>
-        </div>
-          
-        <div class="row">
-            <div class="element">
-                <img src="images/smallImage5.png" style="width: 180px;">
-                <div class="text">
-                    <h2 style="text-align: left; font-size: 2em;"><b>Sargā ilgos sausuma periodos</b></h2>
-                    <h2 style="text-align: left;">Papildina ūdens nesējslāņus un uztur gruntsūdens līmeni</h2>
-                </div>
-            </div>
-            <div class="element">
-                <img src="images/smallImage6.png" style="width: 180px;">
-                <div class="text">
-                    <h2 style="text-align: left; font-size: 2em;"><b>Sniedz dabas veltes</b></h2>
-                    <h2 style="text-align: left;">Ogas, ārstniecības augus un citas</h2>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div id="about">
-        <div class="row" style="margin: 0px;">
-            <div class="element" style="width: 100%;">
-                <div class="text" style="width: 50%; position: relative; left: 0;">
-                    <h1 style="text-align: left; padding-left: 115px;">LIFE MarshMeadows</h1>
-                    <h2 style="text-align: left;">Latvijas Dabas fonds kopā ar lauksaimniekiem projektā LIFE MarshMeadows atjauno
-                        mitrājus vairāk nekā 700 ha platībā Latvijā - Sitas un Pededzes upju palienē un Lubāna mitrājā, kā arī Baltoji Vokė mitrājā Lietuvā.</h2>
-                </div>
-                <img src="images/aboutImage1.png" style="width: 50%; position: relative; top: 0; right: 0;">
-            </div>
-        </div>
-    </div>
-
-    <div id="about2">
-        <div class="row" style="margin: 0px;">
-            <div class="element" style="width: 100%;">
-                <img src="images/aboutImage2.png" style="width: 50%; position: relative; bottom: 0;">
-                <div class="text" style="width: 50%; position: relative; left: 0;">
-                    <h1 style="text-align: left; padding-left: 115px;">Kāpēc mitrāji ir svarīgi?</h1>
-                    <h2 style="text-align: left;">Mitrājs ir vieta, kur sastopas zeme un ūdens, radot un uzturot dzīvību. Mitrājos ir liela bioloģiskā
-                        daudzveidība un tie nodrošina
-                        cilvēkiem svarīgus ekosistēmu
-                        pakalpojumus.</h2>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div id="help" style="display: flex; justify-content: center; align-items: center; text-align: center;">
-        <div style="flex: 1;">
-            <img src="images/infoImage1.png" class="info-bottom-left" style="width: 100%; max-width: 400px; display: block; margin: auto;">
-        </div>
-        <div style="flex: 3; padding: 0 0px;">
-            <h1 style="padding-top: 140px"><span style="color: #415149ff;">Mitrāji mums ir vajadzīgi vairāk, nekā mēs domājam</span></h1>
-            <h1><span style="color: #9f803bff;">lifemarshmeadows.eu</span></h1>
-            <h1><span style="color: #415149ff">Atpakaļ uz sākumu</h2>
-            <a href="javascript:void(0);" onclick="window.scrollTo({top: 0, behavior: 'smooth'});" style="cursor: pointer;">
-                <img src="images/arrow-up.png" style="width: 100px;">
-            </a>
-        </div>
-        <div style="flex: 1;">
-            <img src="images/infoImage2.png" class="info-top-right" style="width: 100%; max-width: 250px; display: block; margin: auto;">
-        </div>
-    </div>
-    
-    <script src="main.js"></script>
-
->>>>>>> parent of aba2861 (gatavaisV1)
 </body>
 </html>
