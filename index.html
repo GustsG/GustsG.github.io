@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Password Generator</title>
+    <title>Gusta superparoļu ģenerators</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -19,15 +19,19 @@
             padding: 10px 20px;
             font-size: 16px;
             cursor: pointer;
+            margin-right: 10px;
         }
     </style>
 </head>
 <body>
 
-    <h1>Password Generator</h1>
+    <h1>Gusta superparoļu ģenerators</h1>
+    <p>16 simbolu parole ar ciparu, lielo burtu un simbolu</p>
     <input type="text" id="password" placeholder="Your generated password will appear here" readonly>
     <br>
     <button onclick="generatePassword()">Generate Password</button>
+    <button onclick="copyPassword()">Copy Password</button>
+    <p id="message"></p>
 
     <script>
         function generatePassword() {
@@ -48,10 +52,27 @@
                 retVal += allCharset.charAt(Math.floor(Math.random() * n));
             }
 
-            // Shuffle the result to ensure the random distribution
-            retVal = retVal.split('').sort(function(){return 0.5-Math.random()}).join('');
+            // Shuffle the result to ensure random distribution
+            retVal = retVal.split('').sort(function() { return 0.5 - Math.random() }).join('');
 
             document.getElementById("password").value = retVal;
+            document.getElementById("message").textContent = ""; // Clear any previous message
+        }
+
+        function copyPassword() {
+            var password = document.getElementById("password").value;
+            var message = document.getElementById("message");
+            if (password) {
+                navigator.clipboard.writeText(password)
+                    .then(() => {
+                        message.textContent = "Password copied to clipboard!";
+                    })
+                    .catch(err => {
+                        message.textContent = "Failed to copy password.";
+                    });
+            } else {
+                message.textContent = "Generate a password first!";
+            }
         }
     </script>
 

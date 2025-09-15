@@ -1,0 +1,4 @@
+                lowercaseCharset = "abcdefghijkmnpqrstuvwxyz",
+                uppercaseCharset = "ABCDEFGHJKLMNPQRSTUVWXYZ",
+                numberCharset = "23456789",
+                symbolCharset = "@#$%*",
